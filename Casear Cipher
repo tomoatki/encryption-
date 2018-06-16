@@ -1,0 +1,46 @@
+import pyperclip
+
+# message
+message = "This is my message"
+
+#encyption key
+key = 13
+
+#set to encypt or decrypt
+mode = 'encypt'
+
+#every symbol that can be encypted
+LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+ # stores the encypted/decrypted form of message
+translated = ''
+
+# capitalize the sting in the message
+message = message.upper()
+
+#run the encyption
+for symbol in message:
+    if symbol in LETTERS:
+        num = LETTERS.find(symbol)
+        if mode == 'encypt':
+            num = num + key
+        elif mode == 'decrypt':
+            num = num - key
+
+            #handle the wrap around if num is larger than the length of
+            # letters or less than 0
+        if num >= len(LETTERS):
+                num = num - len(LETTERS)
+        elif num < 0:
+                num = num + len(LETTERS)
+
+            #  # add encrypted/decrypted number's symbol at the end of translated
+        translated = translated + LETTERS[num]
+
+    else:
+            # just add the symbol without encypting or decyptiong
+        translated = translated + symbol
+
+print(translated)
+
+#pyperclip.copy(translated)
